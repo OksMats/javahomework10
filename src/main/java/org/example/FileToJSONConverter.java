@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FileToJSONConverter {
     public static void main(String[] args) throws IOException {
         List<User> users = readUsersFromFile("file.txt");
@@ -28,14 +29,7 @@ public class FileToJSONConverter {
 
     public static void writeUsersToJsonFile(List<User> users, String fileName) throws IOException {
         FileWriter writer = new FileWriter(fileName);
-        writer.write("[\n");
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            String jsonUser = "{\n name: " + user.getName() + ",\n age:" + user.getAge() + "\n }";
-            if (i < users.size() - 1) {
-                writer.write(",\n");
-            }
-        }
-        writer.write("\n]");
+        Gson gson = new Gson();
+        writer.write(gson.toJson(users));
     }
 }
