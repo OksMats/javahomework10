@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class WordFrequencyCounter {
     public static void main(String[] args) throws IOException {
@@ -30,6 +31,10 @@ public class WordFrequencyCounter {
     }
 
     public static void printWordFrequency(Map<String, Integer> wordFrequency) {
+        Map<String, Integer> sortedWordFrequency = new TreeMap<>(
+                (word1, word2) -> wordFrequency.get(word2) - wordFrequency.get(word1)
+        );
+        sortedWordFrequency.putAll(wordFrequency);
         for (Map.Entry<String, Integer> entry : wordFrequency.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
